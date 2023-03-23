@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: sqlite:///var/www/html/var/data.db
+  db:
+    image: "sqlite:latest"
+    volumes:
+      - ./var:/var/lib/sqlite
