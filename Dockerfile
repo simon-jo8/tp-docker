@@ -5,7 +5,6 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     unzip \
-    sqlite3 \
     && docker-php-ext-install \
     intl \
     pdo_mysql \
@@ -18,8 +17,8 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install 
+RUN composer install --no-interaction --optimize-autoloader
 
 RUN chown -R www-data:www-data var
 
-CMD ["run"]
+CMD ["apache2-foreground"]
